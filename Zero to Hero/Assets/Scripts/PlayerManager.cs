@@ -9,11 +9,10 @@ public class PlayerManager : MonoBehaviour {
     private ControlManager controlManager;
     private Rigidbody rigidbody;
 
-    private float StickTurnSensitivity = 5;
+    private bool upsideDown = false;
 
-    private bool upsideDown = false;    
-
-    private float speed = 10;
+    public float StickTurnSensitivity = 5;
+    public float speed = 10;
 
     public Camera playerCamera; 
 
