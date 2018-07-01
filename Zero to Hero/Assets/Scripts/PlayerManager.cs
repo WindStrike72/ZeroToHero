@@ -8,14 +8,13 @@ public class PlayerManager : MonoBehaviour {
     public float angleX = 0;//shows how far upwards the player is looking currently
     private ControlManager controlManager;
     private Rigidbody rigidbody;
-    public Camera playerCamera; 
-    private GameObject heldObject = null;
 
     private bool upsideDown = false;
 
     public float StickTurnSensitivity = 5;
     public float speed = 10;
 
+    public Camera playerCamera; 
 
     // Use this for initialization
     void Start () {
@@ -33,43 +32,6 @@ public class PlayerManager : MonoBehaviour {
         CheckJump();
 
         Move();
-
-        CheckInteract();
-    }
-
-    private void CheckInteract()
-    {
-
-        //checks if the player is holding and object
-        if (heldObject == null)
-        {
-            if(controlManager.GetInteract() == true)
-            {
-                CheckPickUp();
-            }
-        }
-        else
-        {
-            //sets teh object to be used based on if the player interacting
-            heldObject.GetComponent<Holdable>().SetUse(controlManager.GetInteract());
-            
-        }
-    }
-    
-
-    private void CheckPickUp()
-    {
-        Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
-        RaycastHit hit;
-        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, 20))
-        {
-            if(hit.transform.tag == "Holdable")
-            {
-                heldObject = hit.transform.gameObject;
-                heldObject.GetComponent<Holdable>().ParentTo(playerCamera.transform);
-            }
-
-        }
 
     }
 
