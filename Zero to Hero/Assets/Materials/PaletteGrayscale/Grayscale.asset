@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -770389242, guid: 4df21bd079886d84699ca7be1316c7a7, type: 3}
+  m_Name: Grayscale
+  m_EditorClassIdentifier: 
+  array:
+  - {fileID: 2100000, guid: 45e1fb1f2a57eff4ca1cedba90d020e1, type: 2}
+  - {fileID: 2100000, guid: 055193f19fed4b044a29bd9a77555306, type: 2}
+  - {fileID: 2100000, guid: 1dfcd079918b62e4ebfb13630faeb19f, type: 2}
+  - {fileID: 2100000, guid: e191af5f8102d7d499e541819f6f8cd8, type: 2}
+  - {fileID: 2100000, guid: 6970d125e8f3c8e4cbc639afeaca89a6, type: 2}
+  - {fileID: 2100000, guid: c391e749c4b19bd4ba935d77cb7ccde2, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
