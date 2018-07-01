@@ -11,11 +11,10 @@ public class PlayerManager : MonoBehaviour {
     public Camera playerCamera; 
     private GameObject heldObject = null;
 
-    private float StickTurnSensitivity = 5;
+    private bool upsideDown = false;
 
-    private bool upsideDown = false;    
-
-    private float speed = 10;
+    public float StickTurnSensitivity = 5;
+    public float speed = 10;
 
 
     // Use this for initialization
