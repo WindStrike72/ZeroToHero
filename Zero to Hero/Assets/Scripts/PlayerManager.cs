@@ -2,28 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerManager : MonoBehaviour {
+public class PlayerManager : MonoBehaviour
+{
 
     public float angleY = 0;//shows the directs the player is facing on the x and y axis currently
     public float angleX = 0;//shows how far upwards the player is looking currently
     private ControlManager controlManager;
     private Rigidbody rigidbody;
+    public Camera playerCamera;
+    private GameObject heldObject = null;
+
+    private float StickTurnSensitivity = 5;
 
     private bool upsideDown = false;
 
-    public float StickTurnSensitivity = 5;
-    public float speed = 10;
+    private float speed = 10;
 
-    public Camera playerCamera; 
+
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         controlManager = GetComponent<ControlManager>();
         rigidbody = GetComponent<Rigidbody>();
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
 
         UpdateAngles();
 
@@ -32,6 +38,66 @@ public class PlayerManager : MonoBehaviour {
         CheckJump();
 
         Move();
+
+        CheckInteract();
+        checkThrow();
+    }
+
+    private void CheckInteract()
+    {
+
+        //checks if the player is holding and object
+        if (heldObject == null)
+        {
+            if (controlManager.GetInteract() == true)
+            {
+                CheckPickUp();
+            }
+        }
+        else
+        {
+            //sets teh object to be used based on if the player interacting
+            heldObject.GetComponent<Holdable>().SetUse(controlManager.GetInteract());
+            
+        }
+    }
+
+    private void checkThrow()
+    {
+        if (heldObject != null)
+        {
+            if (controlManager.GetThrow() == true)
+            {
+                if (CheckPlaceable() == false)
+                {
+                    heldObject.GetComponent<Holdable>().Throw();
+                    heldObject.GetComponent<Holdable>().SetUse(false);
+                    heldObject = null;
+                }
+            }
+        }
+    }
+
+
+
+    private bool CheckPlaceable()
+    {
+        return(false);
+    }
+
+    private void CheckPickUp()
+    {
+        Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
+        RaycastHit hit;
+        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, 2))
+        {
+            if (hit.transform.tag == "Holdable")
+            {
+                heldObject = hit.transform.gameObject;
+                heldObject.GetComponent<Holdable>().ParentTo(playerCamera.transform);
+            }
+
+        }
 
     }
 
@@ -44,12 +110,12 @@ public class PlayerManager : MonoBehaviour {
         if (axisAngle != 999)
         {
             //uses joy stick controls
-            if(upsideDown == true)
+            if (upsideDown == true)
             {
-                axisAngle = Mathf.Atan2(Mathf.Sin(Mathf.Deg2Rad * axisAngle), Mathf.Cos(Mathf.Deg2Rad * axisAngle)*-1)*Mathf.Rad2Deg;
+                axisAngle = Mathf.Atan2(Mathf.Sin(Mathf.Deg2Rad * axisAngle), Mathf.Cos(Mathf.Deg2Rad * axisAngle) * -1) * Mathf.Rad2Deg;
             }
             axisAngle = axisAngle + angleY;
-            float distance = controlManager.GetAxisLeftDistance(); 
+            float distance = controlManager.GetAxisLeftDistance();
             xMove = Mathf.Sin(Mathf.Deg2Rad * axisAngle) * speed * distance;
             zMove = Mathf.Cos(Mathf.Deg2Rad * axisAngle) * speed * distance;
         }
@@ -102,20 +168,20 @@ public class PlayerManager : MonoBehaviour {
             }
         }
 
-       
+
         rigidbody.velocity = new Vector3(xMove, rigidbody.velocity.y, zMove);
-        
-        
+
+
     }
 
     //checsk if the player jumped. if they can jump. then jumps if they can
     public void CheckJump()
     {
-        if(controlManager.GetJumpPressed())
+        if (controlManager.GetJumpPressed())
         {
-            if(IsGrounded())
+            if (IsGrounded())
             {
-                if(upsideDown == true)
+                if (upsideDown == true)
                 {
                     rigidbody.velocity = new Vector3(rigidbody.velocity.x, -5, rigidbody.velocity.z);
                 }
@@ -128,7 +194,7 @@ public class PlayerManager : MonoBehaviour {
         }
     }
 
-    private bool IsGrounded() 
+    private bool IsGrounded()
     {
         if (upsideDown == false)
         {
@@ -142,10 +208,10 @@ public class PlayerManager : MonoBehaviour {
     }
     private void UpdateAngles()
     {
-        Vector2 rightStick= controlManager.GetAxisRight();
-        
+        Vector2 rightStick = controlManager.GetAxisRight();
+
         Vector2 mouseChange = controlManager.GetMouseMovement();
-        angleX = angleX + mouseChange.y +(rightStick.y * StickTurnSensitivity);
+        angleX = angleX + mouseChange.y + (rightStick.y * StickTurnSensitivity);
 
         if (angleX > 180)
         {
@@ -159,14 +225,14 @@ public class PlayerManager : MonoBehaviour {
             }
         }
 
-        if(angleX < -90 || angleX > 90)
+        if (angleX < -90 || angleX > 90)
         {
             //upside down
             upsideDown = true;
             Physics.gravity = new Vector3(0, 9.8f, 0);
 
             angleY = angleY - mouseChange.x - (rightStick.x * StickTurnSensitivity);
-        } 
+        }
         else
         {
             //right side up
@@ -176,7 +242,7 @@ public class PlayerManager : MonoBehaviour {
 
             angleY = angleY + mouseChange.x + (rightStick.x * StickTurnSensitivity);
         }
-        
+
     }
 
     private void SetCamera()
@@ -185,5 +251,5 @@ public class PlayerManager : MonoBehaviour {
 
     }
 
-    
+
 }

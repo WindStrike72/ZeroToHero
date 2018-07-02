@@ -32,6 +32,44 @@ public class ControlManager : MonoBehaviour
 	}
     */
 
+    public bool GetInteract()
+    {
+        bool interacted = false;
+
+        if (Input.GetMouseButton(0) == true)
+        {
+            interacted = true;
+        }
+        else
+        {
+            if (Input.GetAxis("RightTrigger") > 0.5)
+            {
+                interacted = true;
+            }
+        }
+
+        return (interacted);
+    }
+
+    public bool GetThrow()
+    {
+        bool interacted = false;
+
+        if (Input.GetMouseButton(1) == true)
+        {
+            interacted = true;
+        }
+        else
+        {
+            if (Input.GetAxis("LeftTrigger") > 0.5)
+            {
+                interacted = true;
+            }
+        }
+
+        return (interacted);
+    }
+
     //checks if left is pressed on dpad or 
     public bool getLeftPressed()
     {
@@ -310,7 +348,7 @@ public class ControlManager : MonoBehaviour
         axisX = Input.GetAxis("LeftStickAxisX");
         axisY = Input.GetAxis("LeftStickAxisY");
         distance = Mathf.Sqrt((axisX * axisX) + (axisY * axisY));
-        
+
 
         return (distance);
     }
@@ -324,7 +362,7 @@ public class ControlManager : MonoBehaviour
 
         axisX = Input.GetAxis("LeftStickAxisX");
         axisY = Input.GetAxis("LeftStickAxisY");
-        
+
 
         return (new Vector2(axisX, axisY));
     }
