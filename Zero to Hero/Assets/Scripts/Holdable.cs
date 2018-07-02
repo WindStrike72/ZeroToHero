@@ -44,6 +44,12 @@ public class Holdable : MonoBehaviour {
         transform.localPosition = new Vector3(parentX, parentY, parentZ);
         transform.localRotation = Quaternion.Euler(parentRotX, parentRotY, parentRotZ);
 
+        held = false;
+        if (holderParent != null)
+        {
+            holderParent.GetComponent<Holder>().SetHolding(false);
+            holderParent = null;
+        }
     }
 
     public void UnParent()
@@ -76,6 +82,15 @@ public class Holdable : MonoBehaviour {
     {
         holderParent = newHolder;
         held = true;
+
+        GetComponent<Collider>().enabled = true;
+        GetComponent<Rigidbody>().isKinematic = true;
+
+        holderParent.GetComponent<Holder>().SetHolding(true);
+        transform.SetParent(holderParent.transform);
+        transform.localPosition = new Vector3(holdX, holdY, holdZ);
+        transform.localRotation = Quaternion.Euler(holdRotX, holdRotY, holdRotZ);
+
     }
 
     public int GetHolderType()

@@ -23,4 +23,13 @@ public class Holder : MonoBehaviour {
         return (holderType);
     }
 
+    public void SetHolding(bool hold)
+    {
+        isHolding = hold;
+    }
+
+    public bool GetHolding()
+    {
+        return (isHolding);
+    }
 }

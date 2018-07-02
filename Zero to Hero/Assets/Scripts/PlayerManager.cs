@@ -19,7 +19,6 @@ public class PlayerManager : MonoBehaviour
     private float speed = 10;
 
 
-
     // Use this for initialization
     void Start()
     {
@@ -78,11 +77,31 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-
-
     private bool CheckPlaceable()
     {
-        return(false);
+        bool placed = false;
+        Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
+        RaycastHit hit;
+        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, 2))
+        {
+            GameObject hitObject = hit.transform.gameObject;
+            if (hitObject.transform.tag == "Holder")
+            {
+                if (hitObject.GetComponent<Holder>().GetHolderType() == heldObject.GetComponent<Holdable>().GetHolderType())
+                {
+                    if (hitObject.GetComponent<Holder>().GetHolding() == false)
+                    {
+                        heldObject.GetComponent<Holdable>().SetHold(hitObject);
+                        placed = true;
+                        heldObject.GetComponent<Holdable>().SetUse(false);
+                        heldObject = null;
+                    }
+                }
+            }
+
+        }
+
+        return (placed);
     }
 
     private void CheckPickUp()
