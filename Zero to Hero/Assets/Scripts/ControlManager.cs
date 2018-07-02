@@ -7,7 +7,7 @@ public class ControlManager : MonoBehaviour
 
     private Dictionary<string, KeyCode> keySettings;
     private Dictionary<string, KeyCode> buttonSettings;
-    private float mouseSense = .20f;
+    public float mouseSense = .20f;
 
     // Use this for initialization
     void Start()
