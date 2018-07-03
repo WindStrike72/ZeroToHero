@@ -66,6 +66,16 @@ public class FireEx : MonoBehaviour
                     hitObject.GetComponent<ComputerManager>().Extinguish();
                 }
             }
+            else
+            {
+                if (hitObject.transform.tag == "Empolyee")
+                {
+                    if (hitObject.GetComponent<EmpolyeeController>().GetFire() == true)
+                    {
+                        hitObject.GetComponent<EmpolyeeController>().Extinguish();
+                    }
+                }
+            }
 
         }
     }

@@ -7,6 +7,7 @@ TagManager:
   - Holdable
   - Holder
   - Computer
+  - Empolyee
   layers:
   - Default
   - TransparentFX

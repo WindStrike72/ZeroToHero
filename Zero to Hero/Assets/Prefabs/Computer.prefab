@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 23237820867444570}
   - component: {fileID: 65901444664731668}
   - component: {fileID: 114717923294236216}
+  - component: {fileID: 135839145009639596}
   m_Layer: 0
   m_Name: Computer
   m_TagString: Computer
@@ -200,6 +201,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fire: {fileID: 1579899347477988}
+--- !u!135 &135839145009639596
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1380373525791804}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.14
+  m_Center: {x: -0.0072099143, y: -0.0023531448, z: 0.01201547}
 --- !u!198 &198219256511441062
 ParticleSystem:
   m_ObjectHideFlags: 1
