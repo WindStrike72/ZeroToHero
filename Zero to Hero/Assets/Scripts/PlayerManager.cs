@@ -57,7 +57,6 @@ public class PlayerManager : MonoBehaviour
         {
             //sets teh object to be used based on if the player interacting
             heldObject.GetComponent<Holdable>().SetUse(controlManager.GetInteract());
-            
         }
     }
 
@@ -82,7 +81,7 @@ public class PlayerManager : MonoBehaviour
         bool placed = false;
         Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
         RaycastHit hit;
-        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, 2))
+        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, 3))
         {
             GameObject hitObject = hit.transform.gameObject;
             if (hitObject.transform.tag == "Holder")

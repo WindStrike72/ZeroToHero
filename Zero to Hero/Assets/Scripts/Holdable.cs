@@ -12,7 +12,7 @@ public class Holdable : MonoBehaviour {
     public float parentRotZ = 0;
     public float throwSpeed = 5;
     private Transform parentTransform = null;
-    private bool use = false;
+    public bool use = false;
 
     public int holderType = 0;
     public bool held = false;
@@ -96,5 +96,20 @@ public class Holdable : MonoBehaviour {
     public int GetHolderType()
     {
         return (holderType);
+    }
+
+    public bool GetParented()
+    {
+        if (parentTransform != null)
+        {
+            return (false);
+
+        }
+        else
+        {
+            return (true);
+
+        }
+
     }
 }

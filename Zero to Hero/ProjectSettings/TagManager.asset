@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Holdable
   - Holder
+  - Computer
   layers:
   - Default
   - TransparentFX
