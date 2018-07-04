@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 23575241559734672}
   - component: {fileID: 65977187977477886}
   - component: {fileID: 114837861788383302}
+  - component: {fileID: 65402300897528054}
   m_Layer: 0
   m_Name: Hole
   m_TagString: Hole
@@ -231,6 +232,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1605576206097424}
   m_Mesh: {fileID: 4300000, guid: 7702e6f884a015a4c942d241543690ec, type: 3}
+--- !u!65 &65402300897528054
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1646907579714402}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.013, y: 0.013, z: 0.07}
+  m_Center: {x: -4.6566126e-10, y: -9.3132235e-10, z: -0.024999993}
 --- !u!65 &65977187977477886
 BoxCollider:
   m_ObjectHideFlags: 1

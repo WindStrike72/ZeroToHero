@@ -134,7 +134,15 @@ public class PlayerManager : MonoBehaviour
                     hole.Close();
                 }
             }
+            else if(hit.transform.tag == "Empolyee")
+            {
+                EmpolyeeController empolyee = hit.transform.gameObject.GetComponent<EmpolyeeController>();
 
+                if (empolyee.GetHanging() == true)
+                {
+                    empolyee.Climb();
+                }
+            }
         }
 
     }

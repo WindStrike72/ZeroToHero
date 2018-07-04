@@ -9,6 +9,7 @@ TagManager:
   - Computer
   - Empolyee
   - Hole
+  - Fridge
   layers:
   - Default
   - TransparentFX

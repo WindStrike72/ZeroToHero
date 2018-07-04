@@ -11,6 +11,9 @@ public class HoleController : MonoBehaviour {
     private float closingTime = 1.5f;
     public GameObject Cover;
 
+    private GameObject victim = null; 
+
+
     // Use this for initialization
     void Start () {
 		
@@ -51,6 +54,21 @@ public class HoleController : MonoBehaviour {
 
     public void Close()
     {
+        if (victim != null)
+        {
+            victim.GetComponent<EmpolyeeController>().Climb();
+        }
+        else
+        {
+            active = false;
+            activeTime = 0;
+            closingTime = 0;
+        }
+    }
+
+
+    public void CloseIgnoringVictim()
+    {
         active = false;
         activeTime = 0;
         closingTime = 0;
@@ -66,5 +84,20 @@ public class HoleController : MonoBehaviour {
     public bool GetOpen()
     {
         return (active);
+    }
+
+    public bool HasVictim()
+    {
+        bool hasVictim = true;
+        if(victim == null)
+        {
+            hasVictim = false;
+        }
+        return hasVictim;
+    }
+
+    public void SetVictim(GameObject newVictim)
+    {
+        victim = newVictim;
     }
 }
