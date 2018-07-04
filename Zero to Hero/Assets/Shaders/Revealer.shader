@@ -7,7 +7,7 @@
 	}
 	SubShader {
 		Tags { "RenderType"="Opaque-1" }
-		LOD 200
+		//LOD 200
 		
 		//doesn't draw this mat
 		ColorMask 0

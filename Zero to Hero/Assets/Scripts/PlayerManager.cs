@@ -50,6 +50,7 @@ public class PlayerManager : MonoBehaviour
         {
             if (controlManager.GetInteract() == true)
             {
+                CheckClose();
                 CheckPickUp();
             }
         }
@@ -113,6 +114,25 @@ public class PlayerManager : MonoBehaviour
             {
                 heldObject = hit.transform.gameObject;
                 heldObject.GetComponent<Holdable>().ParentTo(playerCamera.transform);
+            }
+
+        }
+
+    }
+
+    private void CheckClose()
+    {
+        Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
+        RaycastHit hit;
+        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, 2))
+        {
+            if (hit.transform.tag == "Hole")
+            {
+                HoleController hole = hit.transform.gameObject.GetComponent<HoleController>();
+                if(hole.GetOpen() == true)
+                {
+                    hole.Close();
+                }
             }
 
         }

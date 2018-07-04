@@ -37,7 +37,7 @@ public class HoleController : MonoBehaviour {
         }
         else
         {
-            float tileX = -0.02f;
+            float tileX = 0;
             if (closingTime < closingTimeMax)
             {
                 closingTime = closingTime + Time.deltaTime;
@@ -47,5 +47,24 @@ public class HoleController : MonoBehaviour {
             Cover.transform.localPosition = new Vector3(tileX, 0, 0);
 
         }
+    }
+
+    public void Close()
+    {
+        active = false;
+        activeTime = 0;
+        closingTime = 0;
+    }
+
+    public void Open()
+    {
+        active = true;
+        activeTime = 0;
+        closingTime = 0;
+    }
+
+    public bool GetOpen()
+    {
+        return (active);
     }
 }

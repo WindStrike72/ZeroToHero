@@ -8,6 +8,7 @@ TagManager:
   - Holder
   - Computer
   - Empolyee
+  - Hole
   layers:
   - Default
   - TransparentFX

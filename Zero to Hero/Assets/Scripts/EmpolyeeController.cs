@@ -18,6 +18,12 @@ public class EmpolyeeController : MonoBehaviour {
     public Transform deskLoc;
     private NavMeshAgent navAgent;
 
+    //uesd for pathing
+    private bool returning = true;
+    public bool leaving = false;
+    private float waitTime = 0;//shows how long it should wait before returning
+    public bool isHome = false;
+
     // Use this for initialization
     void Start () {
         navAgent = transform.parent.GetComponent<NavMeshAgent>();
@@ -45,10 +51,51 @@ public class EmpolyeeController : MonoBehaviour {
         {
             die();
         }
+
+        handleTravel();
+    }
+
+    private void handleTravel()
+    {
+
+        if (returning == true)
+        {
+            //if (navAgent.remainingDistance <= 0.1)
+
+            //Debug.Log(Vector3.Distance(transform.position, navAgent.destination));
+            //if (navAgent.remainingDistance <= 0.1)
+            if (Vector3.Distance(transform.position, navAgent.destination) <= 0.1)
+            {
+                returning = false;
+                isHome = true;
+            }
+        }
+
+
+        if (leaving == true)
+        {
+            //if (navAgent.remainingDistance <= 0.1)
+             if (Vector3.Distance(transform.position, navAgent.destination) <= 0.1)
+            {
+                leaving = false;
+            }
+        }
+
+        if (leaving == false && returning == false)
+        {
+            waitTime = waitTime - Time.deltaTime;
+            if(waitTime <= 0)
+            {
+                returning = true;
+                navAgent.SetDestination(deskLoc.position);
+            }
+        }
     }
 
     public void die()
     {
+        dead = true;
+        navAgent.enabled = false;
         GetComponent<Collider>().enabled = false;
         transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
     }
@@ -72,7 +119,11 @@ public class EmpolyeeController : MonoBehaviour {
         return (burning);
     }
 
-    
+    public bool GetDead()
+    {
+        return (dead);
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if (other.transform.tag == "Computer")
@@ -85,5 +136,18 @@ public class EmpolyeeController : MonoBehaviour {
                 }
             }
         }
+    }
+
+    public void SetPath(Transform destination, float wait)
+    {
+        leaving = true;
+        isHome = false;
+        waitTime = wait;
+        navAgent.SetDestination(destination.position);
+    }
+
+    public bool GetIsHome()
+    {
+        return(isHome);
     }
 }
