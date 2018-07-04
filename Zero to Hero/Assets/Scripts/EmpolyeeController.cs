@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EmpolyeeController : MonoBehaviour {
 
@@ -14,10 +15,15 @@ public class EmpolyeeController : MonoBehaviour {
 
     private bool dead = false;
 
+    public Transform deskLoc;
+    private NavMeshAgent navAgent;
+
     // Use this for initialization
     void Start () {
-		
-	}
+        navAgent = transform.parent.GetComponent<NavMeshAgent>();
+
+        navAgent.SetDestination(deskLoc.position);
+    }
 	
 	// Update is called once per frame
 	void Update () {
