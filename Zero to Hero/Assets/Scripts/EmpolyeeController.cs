@@ -225,7 +225,7 @@ public class EmpolyeeController : MonoBehaviour
         {
             if (other.gameObject.GetComponent<HoleController>().HasVictim() == false && other.gameObject.GetComponent<HoleController>().GetOpen() == true)
             {
-                other.gameObject.GetComponent<HoleController>().SetVictim(transform.gameObject);
+                other.gameObject.GetComponent<HoleController>().SetVictim(gameObject);
                 hole = other.gameObject;
                 navAgent.enabled = false;
                 hanging = true;
@@ -284,7 +284,6 @@ public class EmpolyeeController : MonoBehaviour
 
     public void Climb()
     {
-        Debug.Log("Climbing");
         climbing = true;
         hanging = false;
         hole.GetComponent<HoleController>().CloseIgnoringVictim();
@@ -336,5 +335,10 @@ public class EmpolyeeController : MonoBehaviour
         poison.SetActive(false);
         isPoisoned = false;
         lifeTime = lifeTimeMax;
+    }
+
+    public bool GetPoison()
+    {
+        return isPoisoned;
     }
 }
