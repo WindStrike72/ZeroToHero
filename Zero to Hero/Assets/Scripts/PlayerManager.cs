@@ -65,10 +65,13 @@ public class PlayerManager : MonoBehaviour
     {
         if (heldObject != null)
         {
+            
             if (controlManager.GetThrow() == true)
             {
+                
                 if (CheckPlaceable() == false)
                 {
+                    
                     heldObject.GetComponent<Holdable>().Throw();
                     heldObject.GetComponent<Holdable>().SetUse(false);
                     heldObject = null;
